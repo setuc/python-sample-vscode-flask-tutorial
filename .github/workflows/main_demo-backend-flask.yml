@@ -32,8 +32,7 @@ jobs:
         platform-version: ${{ env.PYTHON_VERSION }}
     
     - name: 'Deploy to Azure Web App'
-      uses: azure/webapps-deploy@v2
+      uses: azure/webapps-deploy@v3
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_2a585577347f4d46909d198cb4b682b9 }}
