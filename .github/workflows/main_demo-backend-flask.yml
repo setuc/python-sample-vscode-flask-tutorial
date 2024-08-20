@@ -11,25 +11,27 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: demo-backend-flask
-  PYTHON_VERSION: "3.10"
+  PYTHON_VERSION: "3.11"
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Set up Python version
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ env.PYTHON_VERSION }}
     
     - name: Build using AppService-Build
-      uses: azure/appservice-build@v2
+      uses: azure/appservice-build@v3
       with:
         platform: python
         platform-version: ${{ env.PYTHON_VERSION }}
+        source-directory: ${{ github.workspace }}
+        output-directory: ${{ github.workspace }}/output
     
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
@@ -37,3 +39,4 @@ jobs:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_2a585577347f4d46909d198cb4b682b9 }}
+        package: ${{ github.workspace }}/output
