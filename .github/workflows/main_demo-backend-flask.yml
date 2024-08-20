@@ -30,8 +30,6 @@ jobs:
       with:
         platform: python
         platform-version: ${{ env.PYTHON_VERSION }}
-        source-directory: ${{ github.workspace }}
-        output-directory: ${{ github.workspace }}/output
     
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
