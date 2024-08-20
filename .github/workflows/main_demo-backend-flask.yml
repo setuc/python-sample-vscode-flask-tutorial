@@ -11,7 +11,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: demo-backend-flask
-  PYTHON_VERSION: "3.11"
+  PYTHON_VERSION: "3.10"
 
 jobs:
   build-and-deploy:
